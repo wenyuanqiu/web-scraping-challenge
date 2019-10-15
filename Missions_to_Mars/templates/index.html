@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Life On Mars</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Scrape Mars Content</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get The Latest Mars Content!</a></p>
+    </div>
+
+    <!-- News Items/Weather-->
+    <div class="row">
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <h1>
+            Latest Mars News
+        </h1>
+        <h2>
+            {{mars_stuff_display.news_title}}
+        </h2>
+        <p>
+            {{mars_stuff_display.news_p}}
+        </p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <h1>
+            Current Mars Weather
+        </h1>
+        <p>
+            {{mars_stuff_display.mars_weather}}
+        </p>
+      </div>
+    </div>
+
+    <!-- Featured Image/Facts -->
+    <div class = "row">
+      <div class = "col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <h1>
+          Featured Image
+        </h1>
+        <a href={{mars_stuff_display.featured_image_url}}>
+          <img src= {{mars_stuff_display.featured_image_url}} alt="FeaturedImage">
+        </a>
+      </div>
+      <div class = "col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          {{mars_stuff_display.mars_df_html|safe}}
+      </div>
+    </div>
+
+    <!-- Mars Hemispheres -->
+    <div class = "row">
+        {% for dict_item in mars_stuff_display.hemisphere_image_urls %}
+          <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h1>
+              {{dict_item['title']}}
+            </h1>
+            <a href={{dict_item["img_url"]}}>
+                <img class="img-fluid" id = "image" src={{dict_item["img_url"]}} alt={{dict_item['title']}} href={{dict_item["img_url"]}}/>
+            </a>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>
+
